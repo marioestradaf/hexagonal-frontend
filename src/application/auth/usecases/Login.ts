@@ -1,27 +1,20 @@
-import { useMutation } from "@apollo/client";
-import { LOGIN_MUTATION } from "../../../infrastructure/graphql/queries";
+import Auth from "../../../domain/auth/Auth";
+import AuthRepository from "../../../domain/auth/AuthRepository";
+import AuthRepositoryImpl from "../../../infrastructure/auth/AuthRespositoryImpl";
 
-export default function Login(username: string, password: string) {
-  const [login, { data }] = useMutation(LOGIN_MUTATION);
-  
-  async function handleLogin() {
-    try {
-      const response = await login({
-        variables: {
-          username,
-          password,
-        },
-      });
-      
-      const token = response.data.login.token;
-      
-      // TODO: Save token to local storage or global state
-    } catch (error) {
-      // TODO: Handle error
-    }
-  }
-  
-  return {
-    handleLogin,
-  };
+const authRepository: AuthRepository = new AuthRepositoryImpl();
+
+/**
+ * Performs a login operation with the provided credentials.
+ * 
+ * @param {string} username - The username of the user.
+ * @param {string} password - The password of the user.
+ * @returns {boolean} Returns true if the login is successful, otherwise false.
+ * @throws {Error} Throws an error if the login process encounters an issue.
+*/ 
+export default async function Login(username: string, password: string): Promise<Auth> {
+  const response = await authRepository.login(username, password);
+  console.log(response);
+  return response;
 }
+
