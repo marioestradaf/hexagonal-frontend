@@ -1,8 +1,11 @@
-import Login from "../usecases/Login";
-import Auth from "../../../domain/auth/Auth";
 import { useState } from "react";
+import { AuthUseCase } from "../modules/auth/application/AuthUseCase";
+import AuthRepositoryImpl from "../modules/auth/infrastructure/AuthRespositoryImpl";
 
-export default function AuthForm() {
+const authRepository = new AuthRepositoryImpl();
+const authUseCase = new AuthUseCase(authRepository);
+
+export default function Login() {
   const [inputFields, setInputFields] = useState({
     username: "",
     password: "",
@@ -16,7 +19,7 @@ export default function AuthForm() {
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    Login(inputFields.username, inputFields.password);
+    authUseCase.login(inputFields.username, inputFields.password);
   }
   
   return (

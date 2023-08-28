@@ -1,6 +1,6 @@
-import GetUser from "../usecases/GetUser";
+import GetUser from "../modules/user/application/GetUser";
 import { useLoaderData, LoaderFunctionArgs } from "react-router-dom";
-import User from "../../../domain/user/User";
+import User from "../modules/user/domain/User";
 
 export async function UserPageLoader({ params }: LoaderFunctionArgs) {
 

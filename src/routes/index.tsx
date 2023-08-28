@@ -1,11 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
-import AuthForm from "./auth/presentation/AuthForm";
-import UserPage, { UserPageLoader } from "./user/presentation/UserPage";
+import Login from "./Login";
+import UserPage, { UserPageLoader } from "./User";
 
-export const AppRoutes = createBrowserRouter([
+export const appRoutes = createBrowserRouter([
   {
     path: "/",
-    element: <AuthForm />,
+    element: <Login />,
   },
   {
     path: "user",
@@ -16,4 +16,4 @@ export const AppRoutes = createBrowserRouter([
     element: <UserPage />,
     loader: UserPageLoader,
   }
-])
+]);
