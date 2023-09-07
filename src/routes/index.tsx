@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Login from "./Login";
 import UserPage, { UserPageLoader } from "./User";
 
-export const appRoutes = createBrowserRouter([
+export const routes = createBrowserRouter([
   {
     path: "/",
     element: <Login />,

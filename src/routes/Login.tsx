@@ -1,11 +1,9 @@
 import { useState } from "react";
-import { AuthUseCase } from "../modules/auth/application/AuthUseCase";
-import AuthRepositoryImpl from "../modules/auth/infrastructure/AuthRespositoryImpl";
-
-const authRepository = new AuthRepositoryImpl();
-const authUseCase = new AuthUseCase(authRepository);
+import { useAuthRepository } from "../infrastructure/providers/AuthorizationProvider";
 
 export default function Login() {
+  const authUseCase = useAuthRepository();
+
   const [inputFields, setInputFields] = useState({
     username: "",
     password: "",
