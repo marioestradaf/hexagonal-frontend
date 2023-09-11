@@ -1,10 +1,16 @@
-
-import UserRepositoryImpl from "../infrasctructure/UserRepositoryImpl";
 import User from "../domain/User";
 import UserRepository from "../domain/UserRepository";
 
-const userRepository: UserRepository = new UserRepositoryImpl();
+export class UserUseCase {
+  constructor(private userRepository: UserRepository) {}
 
-export default async function GetUser(id: string): Promise<User> {
-  return await userRepository.findById(id);
-};
+  async getUser(userId: string): Promise<User | undefined> {
+    return await this.userRepository.get(userId);
+  }
+}
+
+// export function getUser(userRepository: UserRepository) {
+// 	return async (userId: string): Promise<User | undefined> => {
+// 		return await userRepository.get(userId);
+// 	};
+// }

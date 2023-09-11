@@ -1,12 +1,14 @@
-import GetUser from "../modules/user/application/GetUser";
 import { useLoaderData, LoaderFunctionArgs } from "react-router-dom";
+import { UserUseCase } from "../modules/user/application/GetUser";
 import User from "../modules/user/domain/User";
+import UserRepository from "../modules/user/domain/UserRepository";
+import UserRepositoryImpl from "../modules/user/infrasctructure/UserRepositoryImpl";
 
 export async function UserPageLoader({ params }: LoaderFunctionArgs) {
+  const userRepository = new UserRepositoryImpl as UserRepository;
+	const userUseCase = new UserUseCase(userRepository);
 
-  const user = await GetUser(params.id ?? "");
-
-  return user
+  return await userUseCase.getUser(params.id ?? "");
 }
 
 export default function UserPage() {
